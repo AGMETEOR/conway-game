@@ -1,0 +1,19 @@
+.conway-game {
+    display: grid;
+    border: 2px solid;
+}
+
+.conway-game--control-pane-expanded {
+    grid-template-columns: auto 200px;
+}
+
+.conway-game__control-pane {
+    border: 1px solid red;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .conway-game--control-pane-expanded {
+        grid-template-columns: auto;
+    }
+  }
