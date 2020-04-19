@@ -1,7 +1,27 @@
-.conway-game__canvas {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 100vh;
-    justify-items: center;
-    align-items: center;
+.grid {
+    width: 150px;
+    line-height: 0;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.box {
+    display: inline-block;
+    border: 1px solid black;
+    width: 15px;
+    height: 15px;
+    margin-left: -1px;
+    margin-bottom: -1px;
+}
+
+.box:hover {
+    background-color: cadetblue;
+}
+
+.off {
+    background-color: white;
+}
+
+.on {
+    background-color: black;
 }
