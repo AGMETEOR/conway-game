@@ -14,3 +14,4 @@ npm run test
 ## Possible Improvements
 - Add linting rules
 - Add more tests especially to the game component and play rules
+- Add more game controls like for speed, reseting the game etc
