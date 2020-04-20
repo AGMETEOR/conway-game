@@ -1,11 +1,11 @@
-.grid {
+.conway-game__game-grid {
     width: 150px;
     line-height: 0;
     margin: auto;
     margin-top: 20px;
 }
 
-.box {
+.cell {
     display: inline-block;
     border: 1px solid black;
     width: 15px;
@@ -14,14 +14,14 @@
     margin-bottom: -1px;
 }
 
-.box:hover {
+.cell:hover {
     background-color: cadetblue;
 }
 
-.off {
+.dead {
     background-color: white;
 }
 
-.on {
+.alive {
     background-color: black;
 }

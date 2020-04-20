@@ -1,5 +1,5 @@
 import { GameState } from "../types";
 
-export function getGameStartStatus(state: GameState): boolean {
-    return state.start;
+export function getGamePlayStatus(state: GameState): boolean {
+    return state.play;
 };

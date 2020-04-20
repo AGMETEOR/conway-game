@@ -2,15 +2,25 @@ import React from 'react';
 import Canvas from '../canvas/canvas';
 import './game.css';
 import { arrayClone } from '../../utils/helpers';
+import { GameAction } from '../../game-redux/types';
 
 export type Grid = Array<Array<number>>;
+
+type GameControlActions = {
+  play: (x: boolean) => GameAction;
+}
+
+type Props = {
+  gamePlayStatus: boolean;
+  actions: GameControlActions;
+}
 
 type State = {
   generation: number;
   gridFull: Grid;
 }
 
-class Game extends React.Component<{}, State> {
+class Game extends React.Component<Props, State> {
 
   private speed?: number;
   private rows: number;
@@ -90,8 +100,16 @@ class Game extends React.Component<{}, State> {
   }
 
   playButton = () => {
-    clearInterval(this.intervalId);
+    // clearInterval(this.intervalId);
+    const { actions } = this.props;
+    actions.play(true);
     this.intervalId = setInterval(this.play, this.speed);
+  }
+
+  pauseButton = () => {
+    clearInterval(this.intervalId);
+    const { actions } = this.props;
+    actions.play(false);
   }
 
   countCellNeighbours = (grid: Grid, x: number, y: number): number => {
@@ -132,10 +150,6 @@ class Game extends React.Component<{}, State> {
     return sum;
   }
 
-  componentDidMount() {
-    this.playButton();
-  }
-
   componentWillUnmount() {
     // clear all timers
     clearInterval(this.intervalId);
@@ -143,9 +157,15 @@ class Game extends React.Component<{}, State> {
 
   render() {
     const { gridFull } = this.state;
+    const { gamePlayStatus } = this.props;
     return (
       <div className="conway-game conway-game--control-pane-expanded">
-        <div className="conway-game__control-pane">Controls</div>
+        <div className="conway-game__control-pane">
+          <button className="conway-game__button" 
+          onClick={gamePlayStatus ? () => this.pauseButton() : () => this.playButton()}>
+            {gamePlayStatus ? 'Pause' : 'Play'}
+          </button>
+        </div>
         <div>
           <Canvas
             gridFull={gridFull}

@@ -1,15 +1,15 @@
 import { combineReducers } from "redux";
 import { GameAction } from "../types";
-import { START_GAME } from "../actionTypes";
+import { TOGGLE_PLAY } from "../actionTypes";
 
-function start(state =  false, action: GameAction) {
+function play(state =  false, action: GameAction) {
     switch (action.type) {
-        case START_GAME:
+        case TOGGLE_PLAY:
             return action.data;
     }
     return state;
 }
 
 export default combineReducers({
-    start,
+    play,
 });

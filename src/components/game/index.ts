@@ -1,22 +1,21 @@
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import Game from './game';
-
-import {start} from '../../game-redux/actions';
-import { getGameStartStatus } from '../../game-redux/selectors';
+import {play} from '../../game-redux/actions';
+import { getGamePlayStatus } from '../../game-redux/selectors';
 import { GameState } from '../../game-redux/types';
 
 function mapStateToProps(state: GameState) {
-  const gameStartStatus = getGameStartStatus(state);
+  const gamePlayStatus = getGamePlayStatus(state);
   return {
-    gameStartStatus,
+    gamePlayStatus,
   };
 }
 
-function mapDispatchToProps(dispatch: any) {
+function mapDispatchToProps(dispatch: Dispatch) {
   return {
     actions: bindActionCreators({
-        start,
+        play,
     }, dispatch),
   };
 }

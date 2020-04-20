@@ -20,7 +20,7 @@ class Canvas extends React.Component<Props, {}> {
         for( let i = 0; i < rows; i++){
             for( let j = 0; j < rows; j++){
                 let boxId = i + "_" + j
-                boxClass = gridFull[i][j] === 1 ? "box on" : "box off";
+                boxClass = gridFull[i][j] === 1 ? "cell alive" : "cell dead";
                 rowsArr.push(
                 <Box 
                 boxClass={boxClass} 
@@ -33,7 +33,7 @@ class Canvas extends React.Component<Props, {}> {
             }
         }
         return(
-            <div className="grid" style={{width: width}}>
+            <div className="conway-game__game-grid" style={{width: width}}>
                 {rowsArr}
             </div>
         )

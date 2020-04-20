@@ -1,8 +1,5 @@
-import {START_GAME} from '../actionTypes';
-import { DispatchFunc, GetStateFunc } from '../types';
+import {TOGGLE_PLAY} from '../actionTypes';
 
-export function start() {
-    return (dispatch: DispatchFunc, getState: GetStateFunc) => {
-        dispatch({type: START_GAME}, getState);
-    }
-}
+export function play(gameStatus: boolean) {
+    return {type: TOGGLE_PLAY, data: gameStatus};
+};
