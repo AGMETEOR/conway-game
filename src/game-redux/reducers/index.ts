@@ -2,7 +2,7 @@ import { combineReducers } from "redux";
 import { GameAction } from "../types";
 import { TOGGLE_PLAY } from "../actionTypes";
 
-function play(state =  false, action: GameAction) {
+export function play(state =  false, action: GameAction) {
     switch (action.type) {
         case TOGGLE_PLAY:
             return action.data;
