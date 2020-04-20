@@ -18,6 +18,7 @@ class Box extends React.Component<Props, {}> {
         const {boxClass, boxId} = this.props;
         return (
             <div 
+            data-testid={boxId}
             className={boxClass}
             id={boxId}
             onClick={this.selectBox}
