@@ -1,7 +1,7 @@
 import React from 'react';
 import Canvas from '../canvas/canvas';
 import './game.css';
-import { arrayClone } from '../../utils/helpers';
+import { arrayClone, make2DArray, bootstrapGrid } from '../../utils/helpers';
 import { GameAction } from '../../game-redux/types';
 
 export type Grid = Array<Array<number>>;
@@ -35,26 +35,8 @@ class Game extends React.Component<Props, State> {
 
     this.state = {
       generation: 0,
-      gridFull: this.bootstrapGrid(this.make2DArray(this.cols, this.rows), this.cols, this.rows),
+      gridFull: bootstrapGrid(make2DArray(this.cols, this.rows), this.cols, this.rows),
     }
-  }
-
-  make2DArray = (cols: number, rows: number): Grid => {
-    let arr = new Array(cols);
-    for (let i = 0; i < arr.length; i++) {
-      arr[i] = new Array(rows);
-    }
-
-    return arr;
-  }
-
-  bootstrapGrid = (grid: Grid, cols: number, rows: number): Grid => {
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        grid[i][j] = Math.round(Math.random());
-      }
-    }
-    return grid;
   }
 
   selectBox = (row: number, col: number) => {

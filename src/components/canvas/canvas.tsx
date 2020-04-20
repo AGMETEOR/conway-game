@@ -33,7 +33,7 @@ class Canvas extends React.Component<Props, {}> {
             }
         }
         return(
-            <div className="conway-game__game-grid" style={{width: width}}>
+            <div className="conway-game__game-grid" style={{width: width}} data-testid="canvas">
                 {rowsArr}
             </div>
         )
