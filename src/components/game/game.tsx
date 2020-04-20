@@ -1,7 +1,7 @@
 import React from 'react';
 import Canvas from '../canvas/canvas';
 import './game.css';
-import { arrayClone, make2DArray, bootstrapGrid } from '../../utils/helpers';
+import { arrayClone, make2DArray } from '../../utils/helpers';
 import { GameAction } from '../../game-redux/types';
 
 export type Grid = Array<Array<number>>;
@@ -13,6 +13,7 @@ type GameControlActions = {
 type Props = {
   gamePlayStatus: boolean;
   actions: GameControlActions;
+  bootstrapGrid: (grid: Grid, cols: number, rows: number) =>  Grid;
 }
 
 type State = {
@@ -27,7 +28,7 @@ class Game extends React.Component<Props, State> {
   private cols: number;
   private intervalId: any;
 
-  constructor(props: any) {
+  constructor(props: Props) {
     super(props);
     this.speed = 1000;
     this.rows = 30;
@@ -35,7 +36,7 @@ class Game extends React.Component<Props, State> {
 
     this.state = {
       generation: 0,
-      gridFull: bootstrapGrid(make2DArray(this.cols, this.rows), this.cols, this.rows),
+      gridFull: props.bootstrapGrid(make2DArray(this.cols, this.rows), this.cols, this.rows),
     }
   }
 
@@ -95,7 +96,6 @@ class Game extends React.Component<Props, State> {
   }
 
   countCellNeighbours = (grid: Grid, x: number, y: number): number => {
-    // destructure state
     let sum = 0;
 
     for (let i = -1; i <= 1; i++) {

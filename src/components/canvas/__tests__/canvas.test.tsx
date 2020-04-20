@@ -1,13 +1,13 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import Canvas from '../canvas';
-import { bootstrapGrid, make2DArray } from '../../../utils/helpers';
+import { make2DArray, bootstrapConstantGrid } from '../../../utils/helpers';
 
 afterEach(cleanup);
 
 
 describe('Canvas', () => {
-    const grid = bootstrapGrid(make2DArray(30, 30), 30, 30)
+    const grid = bootstrapConstantGrid(make2DArray(30, 30), 30, 30)
     const props = {
         gridFull: grid,
         cols: 30,
