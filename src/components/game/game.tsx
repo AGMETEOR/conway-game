@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import Canvas from '../canvas/canvas';
 import './game.css';
@@ -8,21 +9,20 @@ export type Grid = Array<Array<number>>;
 
 type GameControlActions = {
   play: (x: boolean) => GameAction;
-}
+};
 
 type Props = {
   gamePlayStatus: boolean;
   actions: GameControlActions;
-  bootstrapGrid: (grid: Grid, cols: number, rows: number) =>  Grid;
-}
+  bootstrapGrid: (grid: Grid, cols: number, rows: number) => Grid;
+};
 
 type State = {
   generation: number;
   gridFull: Grid;
-}
+};
 
 class Game extends React.Component<Props, State> {
-
   private speed?: number;
   private rows: number;
   private cols: number;
@@ -36,21 +36,25 @@ class Game extends React.Component<Props, State> {
 
     this.state = {
       generation: 0,
-      gridFull: props.bootstrapGrid(make2DArray(this.cols, this.rows), this.cols, this.rows),
-    }
+      gridFull: props.bootstrapGrid(
+        make2DArray(this.cols, this.rows),
+        this.cols,
+        this.rows
+      ),
+    };
   }
 
-  selectBox = (row: number, col: number) => {
-    let gridCopy = arrayClone(this.state.gridFull);
+  selectBox = (row: number, col: number): void => {
+    const gridCopy = arrayClone(this.state.gridFull);
     gridCopy[row][col] = gridCopy[row][col] === 1 ? 0 : 1;
     this.setState({
-      gridFull: gridCopy
+      gridFull: gridCopy,
     });
-  }
+  };
 
-  play = () => {
-    let g = this.state.gridFull;
-    let g2 = arrayClone(this.state.gridFull);
+  play = (): void => {
+    const g = this.state.gridFull;
+    const g2 = arrayClone(this.state.gridFull);
 
     for (let i = 0; i < this.rows; i++) {
       for (let j = 0; j < this.cols; j++) {
@@ -72,28 +76,27 @@ class Game extends React.Component<Props, State> {
         if (currentCellState === 0 && neighbours === 3) {
           g2[i][j] = 1;
         }
-
       }
     }
 
     this.setState({
       gridFull: g2,
-      generation: this.state.generation + 1
+      generation: this.state.generation + 1,
     });
-  }
+  };
 
-  playButton = () => {
+  playButton = (): void => {
     // clearInterval(this.intervalId);
     const { actions } = this.props;
     actions.play(true);
     this.intervalId = setInterval(this.play, this.speed);
-  }
+  };
 
-  pauseButton = () => {
+  pauseButton = (): void => {
     clearInterval(this.intervalId);
     const { actions } = this.props;
     actions.play(false);
-  }
+  };
 
   countCellNeighbours = (grid: Grid, x: number, y: number): number => {
     let sum = 0;
@@ -116,11 +119,11 @@ class Game extends React.Component<Props, State> {
         }
 
         if (r < 0) {
-          r = this.rows - 1
+          r = this.rows - 1;
         }
 
         if (r >= this.rows) {
-          r = 0
+          r = 0;
         }
 
         sum += grid[c][r];
@@ -130,21 +133,27 @@ class Game extends React.Component<Props, State> {
     sum = sum - grid[x][y];
 
     return sum;
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     // clear all timers
     clearInterval(this.intervalId);
   }
 
-  render() {
+  render(): JSX.Element {
     const { gridFull } = this.state;
     const { gamePlayStatus } = this.props;
     return (
       <div className="conway-game conway-game--control-pane-expanded">
         <div className="conway-game__control-pane">
-          <button className="conway-game__button" 
-          onClick={gamePlayStatus ? () => this.pauseButton() : () => this.playButton()}>
+          <button
+            className="conway-game__button"
+            onClick={
+              gamePlayStatus
+                ? () => this.pauseButton()
+                : () => this.playButton()
+            }
+          >
             {gamePlayStatus ? 'Pause' : 'Play'}
           </button>
         </div>
@@ -153,7 +162,8 @@ class Game extends React.Component<Props, State> {
             gridFull={gridFull}
             cols={this.cols}
             rows={this.rows}
-            selectBox={this.selectBox} />
+            selectBox={this.selectBox}
+          />
           <h1>Generations : {this.state.generation}</h1>
         </div>
       </div>
