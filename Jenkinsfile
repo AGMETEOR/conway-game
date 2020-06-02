@@ -9,13 +9,6 @@ pipeline {
         CI = 'true' 
     }
     stages {
-        stage('Initialize'){
-            steps {
-                def dockerHome = tool 'myDocker'
-                env.PATH = "${dockerHome}/bin:${env.PATH}"
-            }
-        }
-
         stage('Linting') {
             steps {
                 sh 'echo "Running the linting tool tidy"'
