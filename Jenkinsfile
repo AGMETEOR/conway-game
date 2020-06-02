@@ -34,7 +34,7 @@ pipeline {
         stage('Build') {
             agent any
             steps {
-                sh "docker --version"
+                sh "docker -v"
             }
         }
 
