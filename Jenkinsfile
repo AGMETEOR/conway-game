@@ -11,7 +11,6 @@ node {
 
     stage('Linting') {
         app.inside {
-            sh 'sudo chown -R 111:115 "/.npm"'
             sh 'npm install'
             sh 'npm run lint'
         }
