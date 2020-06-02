@@ -11,8 +11,10 @@ node {
 
     stage('Linting') {
         app.inside {
-            sh 'npm install'
-            sh 'npm run lint'
+            withEnv(["HOME=."]) {
+                sh 'npm install'
+                sh 'npm run lint'
+            }
         }
     }
 }
