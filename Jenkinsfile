@@ -6,12 +6,13 @@ pipeline {
         }
     }
     environment {
+        HOME = '.'
         CI = 'true' 
     }
     stages {
         stage('Linting') {
             steps {
-                sh 'echo "Running the linting tool tidy"'
+                sh 'echo "Running the linting tools"'
                 sh 'npm install'
                 sh 'npm run lint'
             }
