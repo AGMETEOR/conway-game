@@ -1,17 +1,16 @@
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'node:12-alpine3.10'
+            args '-p 3000:3000'
+        }
+    }
     environment {
         HOME = '.'
         CI = 'true' 
     }
     stages {
         stage('Linting') {
-            agent {
-                docker {
-                    image 'node:12-alpine3.10'
-                    args '-p 3000:3000'
-                }
-            }
             steps {
                 sh 'echo "Running the linting tools"'
                 sh 'npm install'
@@ -20,12 +19,6 @@ pipeline {
         }
 
         stage('Testing') {
-            agent {
-                docker {
-                    image 'node:12-alpine3.10'
-                    args '-p 3000:3000'
-                }
-            }
             steps {
                 sh 'echo "Running tests"'
                 sh 'npm run test'
