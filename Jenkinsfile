@@ -24,4 +24,11 @@ node {
             }
         }
     }
+
+    stage('Push image') {
+        docker.withRegistry('https://registry.hub.docker.com', 'dockerhubCreds') {
+            app.push("${env.BUILD_NUMBER}")
+            app.push("latest")
+        }
+    }
 }
