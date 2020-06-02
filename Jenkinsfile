@@ -5,23 +5,23 @@ node {
         checkout scm
     }
 
-    withEnv(["HOME=."]) {}
-
     stage('Build image') {
         app = docker.build("agmeteor/conway-game")
     }
 
-    stage('Linting') {
-        app.inside {
-            sh 'npm install'
-            sh 'npm run lint'
+    withEnv(["HOME=."]) {
+        stage('Linting') {
+            app.inside {
+                sh 'npm install'
+                sh 'npm run lint'
+            }
         }
-    }
 
-    stage('Testing') {
-        app.inside {
-            sh 'npm install'
-            sh 'npm run test'
+        stage('Testing') {
+            app.inside {
+                sh 'npm install'
+                sh 'npm run test'
+            }
         }
     }
 }
