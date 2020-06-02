@@ -12,6 +12,7 @@ pipeline {
         stage('Linting') {
             steps {
                 sh 'echo "Running the linting tool tidy"'
+                sh 'npm install'
                 sh 'npm run lint'
             }
         }
