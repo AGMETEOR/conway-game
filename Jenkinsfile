@@ -6,19 +6,20 @@ node {
     }
 
     stage('Build image') {
-        app = docker.build("agmeteor/conway-game")
+        app-dev = docker.build("dev-image")
+        app-prod = docker.build("agmeteor/conway-game", "./prod")
     }
 
     withEnv(["HOME=.", "CI=true"]) {
         stage('Linting') {
-            app.inside {
+            app-dev.inside {
                 sh 'yarn'
                 sh 'yarn lint'
             }
         }
 
         stage('Testing') {
-            app.inside {
+            app-dev.inside {
                 sh 'yarn'
                 sh 'yarn test'
             }
@@ -27,8 +28,8 @@ node {
 
     stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhubCreds') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+            app-prod.push("${env.BUILD_NUMBER}")
+            app-prod.push("latest")
         }
     }
 }
