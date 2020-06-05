@@ -9,7 +9,7 @@ node {
 
     stage('Build image') {
         app = docker.build("dev-image")
-        prod = docker.build("agmeteor/conway-game", "-f ${prodDockerfile}")
+        prod = docker.build("agmeteor/conway-game", "-f ${prodDockerfile} .")
     }
 
     withEnv(["HOME=.", "CI=true"]) {
