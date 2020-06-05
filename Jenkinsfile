@@ -1,6 +1,7 @@
 node {
     def app
     def prod
+    def prodDockerfile = 'Dockerfile.prod'
 
     stage('Clone repository') {
         checkout scm
@@ -8,7 +9,7 @@ node {
 
     stage('Build image') {
         app = docker.build("dev-image")
-        prod = docker.build("agmeteor/conway-game", "./prod")
+        prod = docker.build("agmeteor/conway-game", "-f ${dockerfile}")
     }
 
     withEnv(["HOME=.", "CI=true"]) {
