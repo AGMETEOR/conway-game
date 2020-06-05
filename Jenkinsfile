@@ -12,15 +12,15 @@ node {
     withEnv(["HOME=.", "CI=true"]) {
         stage('Linting') {
             app.inside {
-                sh 'npm install'
-                sh 'npm run lint'
+                sh 'yarn'
+                sh 'yarn lint'
             }
         }
 
         stage('Testing') {
             app.inside {
-                sh 'npm install'
-                sh 'npm run test'
+                sh 'yarn'
+                sh 'yarn test'
             }
         }
     }
