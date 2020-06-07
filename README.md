@@ -21,6 +21,11 @@ npm run test
 - A kubernetes cluster is set up using `eksctl` that uses CloudFormation in the background to create cluster resources
 - Node used for green deployments is labeled using 
 `kubectl label nodes ip-XX-XX-XX-XX.us-east-2.compute.internal dep=green`
+- Nodes used for stable or blue depoyments belong to NodeGroup `frontend-workers` and the label 
+used is `alpha.eksctl.io/nodegroup-name: frontend-workers`
+- To get the green loadbalancer service run `kubectl get service/conway-frontend-green-svc |  awk {'print $1" " $2 " " $4 " " $5'} | column -t`
+
+- To get the blue or stable loadbalancer service run `kubectl get service/conway-frontend-svc |  awk {'print $1" " $2 " " $4 " " $5'} | column -t`
 
 
 ## Possible Improvements
