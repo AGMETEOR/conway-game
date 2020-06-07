@@ -36,7 +36,9 @@ node {
     }
 
     stage('Dep') {
-        sh 'aws configure list'
+        withAWS(region:'us-east-2', credentials:'aws-creds') {
+            sh 'aws configure list'
+        }
     }
 
     stage('Deploy') {
