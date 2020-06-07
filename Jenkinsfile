@@ -39,8 +39,6 @@ node {
             withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
                 sh("kubectl --kubeconfig $KUBECONFIG apply -f k8s/deployment.yaml -f k8s/service.yaml")
                 sh("kubectl --kubeconfig $KUBECONFIG apply -f k8s/deployment-green.yaml -f k8s/service-green.yaml")
-                sh("kubectl --kubeconfig $KUBECONFIG get service/conway-frontend-svc |  awk {'print $1" " $2 " " $4 " " $5'} | column -t")
-                sh("kubectl --kubeconfig $KUBECONFIG get service/conway-frontend-svc |  awk {'print $1" " $2 " " $4 " " $5'} | column -t")
             }
         }
     }
