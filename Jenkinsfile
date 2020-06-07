@@ -35,8 +35,8 @@ node {
         }
     }
 
-    withEnv(["KUBECONFIG=${kubeconfig}"]) {
-        stage('Deploy') {
+    stage('Deploy') {
+        withEnv(["KUBECONFIG=${kubeconfig}"]) {
             sh("kubectl --kubeconfig $KUBECONFIG get pods")
         }
     }
