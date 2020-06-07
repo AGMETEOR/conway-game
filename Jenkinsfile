@@ -37,13 +37,9 @@ node {
 
     stage('Dep') {
         withAWS(region:'us-east-2', credentials:'aws-creds') {
-            sh 'aws configure list'
-        }
-    }
-
-    stage('Deploy') {
-        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-            sh("kubectl --kubeconfig $KUBECONFIG get pods")
+            withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                sh("kubectl --kubeconfig $KUBECONFIG get pods")
+            }
         }
     }
 }
