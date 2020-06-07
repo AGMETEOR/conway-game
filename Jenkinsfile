@@ -36,7 +36,7 @@ node {
     }
 
     stage('Deploy') {
-        withCredentials([string(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
             sh("kubectl --kubeconfig $KUBECONFIG get pods")
         }
     }
