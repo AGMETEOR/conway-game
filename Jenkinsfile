@@ -12,14 +12,16 @@ node {
         prod = docker.build("agmeteor/conway-game", "-f ${prodDockerfile} .")
     }
 
-    withEnv(["HOME=.", "CI=true"]) {
+    withEnv(["HOME=."]) {
         stage('Linting') {
             app.inside {
                 sh 'yarn'
                 sh 'yarn lint'
             }
         }
+    }
 
+    withEnv(["HOME=.", "CI=true"]) {
         stage('Testing') {
             app.inside {
                 sh 'yarn'
