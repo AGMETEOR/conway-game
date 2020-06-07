@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: conway-frontend-green
-          image: agmeteor/conway-game:green
+          image: agmeteor/conway-game:buildTag
           ports:
             - containerPort: 80
       nodeSelector:
