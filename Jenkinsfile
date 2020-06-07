@@ -30,16 +30,7 @@ node {
 
     stage('Push image') {
         docker.withRegistry('https://registry.hub.docker.com', 'dockerhubCreds') {
-            prod.push("${env.BUILD_NUMBER}")
-            prod.push("latest")
-        }
-    }
-
-    stage('Deploy') {
-        withAWS(region:'us-east-2', credentials:'aws-creds') {
-            withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                sh("kubectl --kubeconfig $KUBECONFIG apply -f k8s/deployment.yaml -f k8s/service.yaml")
-            }
+            prod.push("stable")
         }
     }
 }

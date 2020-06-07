@@ -14,6 +14,8 @@ spec:
     spec:
       containers:
         - name: conway-frontend-blue
-          image: agmeteor/conway-game:latest
+          image: agmeteor/conway-game:stable
           ports:
             - containerPort: 80
+      nodeSelector:
+        alpha.eksctl.io/nodegroup-name: frontend-workers

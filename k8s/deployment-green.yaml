@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conway-deployment-green
+spec:
+  selector:
+    matchLabels:
+      app: conway-frontend-green
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: conway-frontend-green
+    spec:
+      containers:
+        - name: conway-frontend-green
+          image: agmeteor/conway-game:latest-green
+          ports:
+            - containerPort: 80
+      nodeSelector:
+        dep: green
