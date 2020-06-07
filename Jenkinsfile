@@ -34,4 +34,10 @@ node {
             prod.push("latest")
         }
     }
+
+    withEnv(["KUBECONFIG=${kubeconfig}"]) {
+        stage('Deploy') {
+            sh("kubectl --kubeconfig $KUBECONFIG get pods")
+        }
+    }
 }

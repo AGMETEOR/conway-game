@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conway-deployment
+spec:
+  selector:
+    matchLabels:
+      app: conway
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: conway
+    spec:
+      containers:
+        - name: conway
+          image: agmeteor/conway-game:latest
+          ports:
+            - containerPort: 80
