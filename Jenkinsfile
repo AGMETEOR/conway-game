@@ -36,6 +36,6 @@ node {
     }
 
     stage('Deploy') {
-        sh("kubectl --kubeconfig $KUBECONFIG get pods")
+        sh("kubectl --version")
     }
 }
