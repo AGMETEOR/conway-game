@@ -5,15 +5,15 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: conway
+      app: conway-frontend-blue
   replicas: 2
   template:
     metadata:
       labels:
-        app: conway
+        app: conway-frontend-blue
     spec:
       containers:
-        - name: conway
+        - name: conway-frontend-blue
           image: agmeteor/conway-game:latest
           ports:
             - containerPort: 80

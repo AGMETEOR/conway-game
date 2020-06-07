@@ -35,10 +35,10 @@ node {
         }
     }
 
-    stage('Dep') {
+    stage('Deploy') {
         withAWS(region:'us-east-2', credentials:'aws-creds') {
             withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                sh("kubectl --kubeconfig $KUBECONFIG get pods")
+                sh("kubectl --kubeconfig $KUBECONFIG apply -f k8s/deployment.yaml -f k8s/service.yaml")
             }
         }
     }
