@@ -16,7 +16,7 @@ class Box extends React.Component<Props, {}> {
     selectBox(row, col);
   };
 
-  render(): JSX.Element {
+  render() {
     const { boxClass, boxId } = this.props;
     return (
       <div
