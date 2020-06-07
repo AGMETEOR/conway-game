@@ -35,7 +35,13 @@ node {
         }
     }
 
+    stage('Dep') {
+        sh 'aws configure list'
+    }
+
     stage('Deploy') {
-        sh('aws s3 ls')
+        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+            sh("kubectl --kubeconfig $KUBECONFIG get pods")
+        }
     }
 }
